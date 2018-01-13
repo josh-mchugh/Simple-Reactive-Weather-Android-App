@@ -10,6 +10,7 @@ import com.example.jmchugh.rxmvp.app.dagger.AppModule.AppModule;
 import com.example.jmchugh.rxmvp.app.dagger.DaggerAppComponent;
 import com.example.jmchugh.rxmvp.app.logging.CrashReportTree;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.squareup.leakcanary.LeakCanary;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
@@ -18,16 +19,16 @@ import timber.log.Timber;
  * Created by jmchugh on 1/11/2018.
  */
 
-public class CleanArchitectureApplication extends Application {
+public class RxMVPApplication extends Application {
 
-    public static CleanArchitectureApplication get(Activity activity){
+    public static RxMVPApplication get(Activity activity){
 
-         return (CleanArchitectureApplication) activity.getApplication();
+         return (RxMVPApplication) activity.getApplication();
     }
 
-    public static CleanArchitectureApplication get(Service service){
+    public static RxMVPApplication get(Service service){
 
-        return (CleanArchitectureApplication) service.getApplication();
+        return (RxMVPApplication) service.getApplication();
     }
 
     private AppComponent appComponent;
@@ -36,12 +37,22 @@ public class CleanArchitectureApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        //Init the logging
         Timber.plant(BuildConfig.DEBUG ? new Timber.DebugTree() : new CrashReportTree());
 
+        //Init Fire base reporting.
         Fabric.with(this, new Crashlytics());
-
         FirebaseAnalytics.getInstance(this);
 
+        //Init Lead Canary
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
+
+        //Init Application level dependency injection.
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
