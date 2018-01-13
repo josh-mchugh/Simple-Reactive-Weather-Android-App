@@ -1,6 +1,6 @@
 package com.example.jmchugh.cleanarchitectureexample.app.network;
 
-import com.example.jmchugh.cleanarchitectureexample.weather.mvp.model.WeatherForecastModel;
+import com.example.jmchugh.cleanarchitectureexample.weather.mvp.model.entity.WeatherForecastModel;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

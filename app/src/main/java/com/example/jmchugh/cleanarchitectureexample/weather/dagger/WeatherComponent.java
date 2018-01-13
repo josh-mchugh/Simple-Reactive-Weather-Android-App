@@ -1,5 +1,6 @@
 package com.example.jmchugh.cleanarchitectureexample.weather.dagger;
 
+
 import com.example.jmchugh.cleanarchitectureexample.app.dagger.AppComponent;
 import com.example.jmchugh.cleanarchitectureexample.weather.WeatherActivity;
 
@@ -10,8 +11,8 @@ import dagger.Component;
  */
 
 @WeatherScope
-@Component(modules = {WeatherModule.class}, dependencies = {AppComponent.class})
+@Component(modules = WeatherModule.class, dependencies = AppComponent.class)
 public interface WeatherComponent {
 
-    void inject(WeatherActivity weatherActivity);
+    void inject(WeatherActivity activity);
 }

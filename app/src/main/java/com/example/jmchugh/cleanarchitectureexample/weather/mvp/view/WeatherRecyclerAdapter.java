@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.jmchugh.cleanarchitectureexample.weather.mvp.model.Forecast;
+import com.example.jmchugh.cleanarchitectureexample.weather.mvp.model.entity.Forecast;
 import com.example.jmchugh.cleanarchitectureexample.R;
 import com.google.common.collect.ImmutableList;
 
@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by jmchugh on 1/10/2018.
  */
 
-public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecastAdapter.WeatherForecastHolder> {
+public class WeatherRecyclerAdapter extends RecyclerView.Adapter<WeatherRecyclerAdapter.WeatherForecastHolder> {
 
     private List<Forecast> forecasts;
 
@@ -33,7 +33,7 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
     }
 
     @Override
-    public void onBindViewHolder(WeatherForecastAdapter.WeatherForecastHolder holder, int position) {
+    public void onBindViewHolder(WeatherRecyclerAdapter.WeatherForecastHolder holder, int position) {
 
         holder.bind(forecasts.get(position));
     }

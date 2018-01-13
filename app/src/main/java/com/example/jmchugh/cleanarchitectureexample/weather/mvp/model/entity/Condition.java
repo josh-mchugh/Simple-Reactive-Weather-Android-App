@@ -1,9 +1,9 @@
-package com.example.jmchugh.cleanarchitectureexample.weather.mvp.model;
+package com.example.jmchugh.cleanarchitectureexample.weather.mvp.model.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Forecast {
+public class Condition {
 
     @SerializedName("code")
     @Expose
@@ -11,15 +11,9 @@ public class Forecast {
     @SerializedName("date")
     @Expose
     private String date;
-    @SerializedName("day")
+    @SerializedName("temp")
     @Expose
-    private String day;
-    @SerializedName("high")
-    @Expose
-    private String high;
-    @SerializedName("low")
-    @Expose
-    private String low;
+    private String temp;
     @SerializedName("text")
     @Expose
     private String text;
@@ -40,28 +34,12 @@ public class Forecast {
         this.date = date;
     }
 
-    public String getDay() {
-        return day;
+    public String getTemp() {
+        return temp;
     }
 
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String getHigh() {
-        return high;
-    }
-
-    public void setHigh(String high) {
-        this.high = high;
-    }
-
-    public String getLow() {
-        return low;
-    }
-
-    public void setLow(String low) {
-        this.low = low;
+    public void setTemp(String temp) {
+        this.temp = temp;
     }
 
     public String getText() {

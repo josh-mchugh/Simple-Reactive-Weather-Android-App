@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.jmchugh.cleanarchitectureexample.app.dagger.AppModule.AppModule;
 import com.example.jmchugh.cleanarchitectureexample.app.dagger.AppModule.RetrofitModule;
+import com.example.jmchugh.cleanarchitectureexample.app.network.WeatherRetrofitService;
 
 import dagger.Component;
 import okhttp3.OkHttpClient;
@@ -20,5 +21,5 @@ public interface AppComponent {
 
     OkHttpClient okHttpClient();
 
-    Retrofit retrofit();
+    WeatherRetrofitService weatherRetrofitService();
 }

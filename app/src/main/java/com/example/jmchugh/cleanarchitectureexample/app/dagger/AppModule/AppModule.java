@@ -22,8 +22,8 @@ public class AppModule {
         this.context = application.getApplicationContext();
     }
 
-    @AppScope
     @Provides
+    @AppScope
     public Context context() {
 
         return context;

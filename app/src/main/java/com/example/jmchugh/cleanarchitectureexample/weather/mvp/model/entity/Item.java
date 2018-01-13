@@ -1,4 +1,4 @@
-package com.example.jmchugh.cleanarchitectureexample.weather.mvp.model;
+package com.example.jmchugh.cleanarchitectureexample.weather.mvp.model.entity;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

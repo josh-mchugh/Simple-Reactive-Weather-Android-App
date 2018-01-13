@@ -25,15 +25,15 @@ import timber.log.Timber;
 @Module
 public class RetrofitModule {
 
-    @AppScope
     @Provides
+    @AppScope
     public WeatherRetrofitService weatherRetrofitService(Retrofit retrofit) {
 
         return retrofit.create(WeatherRetrofitService.class);
     }
 
-    @AppScope
     @Provides
+    @AppScope
     public Retrofit retrofit(OkHttpClient okHttpClient) {
 
         return new Retrofit.Builder()
@@ -44,8 +44,8 @@ public class RetrofitModule {
                 .build();
     }
 
-    @AppScope
     @Provides
+    @AppScope
     public OkHttpClient okHttpClient(HttpLoggingInterceptor loggingInterceptor, Cache cache) {
 
         return new OkHttpClient.Builder()
@@ -55,16 +55,16 @@ public class RetrofitModule {
                 .build();
     }
 
-    @AppScope
     @Provides
+    @AppScope
     public HttpLoggingInterceptor httpLoggingInterceptor() {
 
         return new HttpLoggingInterceptor(message -> Timber.tag("OkHttp").d(message))
                 .setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
-    @AppScope
     @Provides
+    @AppScope
     public Cache cache(Context context) {
 
         return new Cache(new File(context.getCacheDir(), "okhttp_cache"), 10 * 1024 * 1024);

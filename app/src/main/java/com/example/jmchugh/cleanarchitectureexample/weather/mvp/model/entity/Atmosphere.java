@@ -1,4 +1,4 @@
-package com.example.jmchugh.cleanarchitectureexample.weather.mvp.model;
+package com.example.jmchugh.cleanarchitectureexample.weather.mvp.model.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
