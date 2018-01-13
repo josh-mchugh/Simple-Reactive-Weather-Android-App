@@ -1,4 +1,4 @@
-package com.example.jmchugh.cleanarchitectureexample.weather.data.net;
+package com.example.jmchugh.cleanarchitectureexample.app.network;
 
 import com.example.jmchugh.cleanarchitectureexample.weather.mvp.model.WeatherForecastModel;
 

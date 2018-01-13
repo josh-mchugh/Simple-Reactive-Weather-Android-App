@@ -66,6 +66,12 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-crash:11.8.0'
 
+    //Dagger 2
+    compile 'com.google.dagger:dagger-android:2.14.1'
+    compile 'com.google.dagger:dagger-android-support:2.14.1' // if you use the support libraries
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+
     //Weather Icons
     compile 'com.github.pwittchen:weathericonview:1.1.0'
 

@@ -1,4 +1,4 @@
-package com.example.jmchugh.cleanarchitectureexample.framework.logging;
+package com.example.jmchugh.cleanarchitectureexample.app.logging;
 
 import android.util.Log;
 

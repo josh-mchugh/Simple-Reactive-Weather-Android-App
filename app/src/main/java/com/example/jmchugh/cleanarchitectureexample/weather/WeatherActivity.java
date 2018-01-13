@@ -7,11 +7,18 @@ import android.support.v7.widget.RecyclerView;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.jmchugh.cleanarchitectureexample.BuildConfig;
-import com.example.jmchugh.cleanarchitectureexample.weather.data.net.WeatherRetrofitGenerator;
+import com.example.jmchugh.cleanarchitectureexample.CleanArchitectureApplication;
+import com.example.jmchugh.cleanarchitectureexample.app.dagger.AppModule.RetrofitModule;
+import com.example.jmchugh.cleanarchitectureexample.app.network.WeatherRetrofitService;
+import com.example.jmchugh.cleanarchitectureexample.weather.dagger.DaggerWeatherComponent;
+import com.example.jmchugh.cleanarchitectureexample.weather.dagger.WeatherModule;
+import com.example.jmchugh.cleanarchitectureexample.weather.mvp.service.WeatherService;
 import com.example.jmchugh.cleanarchitectureexample.weather.mvp.view.WeatherForecastAdapter;
 import com.example.jmchugh.cleanarchitectureexample.R;
-import com.example.jmchugh.cleanarchitectureexample.framework.logging.CrashReportTree;
+import com.example.jmchugh.cleanarchitectureexample.app.logging.CrashReportTree;
 import com.google.firebase.analytics.FirebaseAnalytics;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,30 +37,33 @@ public class WeatherActivity extends AppCompatActivity {
 
     private Disposable weatherSubscription;
 
+    @Inject
+    WeatherService service;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        DaggerWeatherComponent.builder()
+                .appComponent(CleanArchitectureApplication.get(this).component())
+                .weatherModule(new WeatherModule(this))
+                .build().inject(this);
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        Timber.plant(BuildConfig.DEBUG ? new Timber.DebugTree() : new CrashReportTree());
-
-        Fabric.with(this, new Crashlytics());
-
-        FirebaseAnalytics.getInstance(this);
 
         weatherForecastAdapter = new WeatherForecastAdapter();
         recyclerView.setAdapter(weatherForecastAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
 
-        weatherSubscription = WeatherRetrofitGenerator.getWeatherRetrofitService()
+        weatherSubscription = service.getWeatherRetrofitService()
                 .getWeatherForecast()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         weatherForecast -> weatherForecastAdapter.setWeatherForecasts(weatherForecast.getQuery().getResults().getChannel().getItem().getForecast()),
-                        error -> Timber.e(error, "Unable to retrieve weather data.")
+                      error -> Timber.e(error, "Unable to retrieve weather data.")
                 );
     }
 
