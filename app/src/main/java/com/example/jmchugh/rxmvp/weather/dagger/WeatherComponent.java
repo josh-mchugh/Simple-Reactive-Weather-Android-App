@@ -3,6 +3,7 @@ package com.example.jmchugh.rxmvp.weather.dagger;
 
 import com.example.jmchugh.rxmvp.app.dagger.AppComponent;
 import com.example.jmchugh.rxmvp.weather.WeatherActivity;
+import com.example.jmchugh.rxmvp.weather.mvp.view.WeatherView;
 
 import dagger.Component;
 
@@ -15,4 +16,6 @@ import dagger.Component;
 public interface WeatherComponent {
 
     void inject(WeatherActivity activity);
+
+    void inject(WeatherView view);
 }

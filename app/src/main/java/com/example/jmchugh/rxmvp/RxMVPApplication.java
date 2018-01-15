@@ -17,6 +17,8 @@ import timber.log.Timber;
 
 /**
  * Created by jmchugh on 1/11/2018.
+ *
+ * https://github.com/MindorksOpenSource/android-mvp-architecture
  */
 
 public class RxMVPApplication extends Application {

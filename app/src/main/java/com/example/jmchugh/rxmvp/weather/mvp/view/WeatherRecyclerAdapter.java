@@ -4,8 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.jmchugh.rxmvp.weather.mvp.model.entity.Forecast;
 import com.example.jmchugh.rxmvp.R;
@@ -13,27 +11,24 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by jmchugh on 1/10/2018.
  */
 
-public class WeatherRecyclerAdapter extends RecyclerView.Adapter<WeatherRecyclerAdapter.WeatherForecastHolder> {
+public class WeatherRecyclerAdapter extends RecyclerView.Adapter<WeatherRecyclerViewHolder> {
 
     private List<Forecast> forecasts;
 
     @Override
-    public WeatherForecastHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WeatherRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_weather_forecast_item, parent, false);
 
-        return new WeatherForecastHolder(view);
+        return new WeatherRecyclerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(WeatherRecyclerAdapter.WeatherForecastHolder holder, int position) {
+    public void onBindViewHolder(WeatherRecyclerViewHolder holder, int position) {
 
         holder.bind(forecasts.get(position));
     }
@@ -53,31 +48,5 @@ public class WeatherRecyclerAdapter extends RecyclerView.Adapter<WeatherRecycler
 
         this.forecasts = ImmutableList.copyOf(forecasts);
         notifyDataSetChanged();
-    }
-
-    class WeatherForecastHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.weather_forecast_item_icon)
-        ImageView icon;
-
-        @BindView(R.id.weather_forecast_item_min_temp)
-        TextView minTemp;
-
-        @BindView(R.id.weather_forecast_item_max_temp)
-        TextView maxTemp;
-
-        public WeatherForecastHolder(View itemView){
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-
-        public void bind(Forecast forecast){
-
-            //Glide
-
-            //Text
-            minTemp.setText(forecast.getLow());
-            maxTemp.setText(forecast.getHigh());
-        }
     }
 }

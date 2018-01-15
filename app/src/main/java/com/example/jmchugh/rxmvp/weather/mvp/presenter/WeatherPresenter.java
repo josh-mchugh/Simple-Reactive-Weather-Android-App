@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by jmchugh on 1/12/2018.
@@ -32,7 +33,10 @@ public class WeatherPresenter {
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                         forecasts -> view.updateWeatherView(forecasts),
-                        error -> view.showErrorToast()
+                        error -> {
+                            Timber.e(error, "Unable to retrieve forecasts.");
+                            view.showErrorToast();
+                        }
                 );
 
         compositeDisposable.add(weatherDisposable);

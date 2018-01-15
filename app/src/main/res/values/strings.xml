@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">CleanArchitectureExample</string>
+    <string name="app_name">RxMVP Architecture</string>
+    <string name="max_temp">High</string>
+    <string name="min_temp">Low</string>
 </resources>
