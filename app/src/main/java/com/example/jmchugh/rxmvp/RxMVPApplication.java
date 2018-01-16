@@ -3,6 +3,7 @@ package com.example.jmchugh.rxmvp;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
+import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.jmchugh.rxmvp.app.dagger.AppComponent;
@@ -11,6 +12,7 @@ import com.example.jmchugh.rxmvp.app.dagger.DaggerAppComponent;
 import com.example.jmchugh.rxmvp.app.logging.CrashReportTree;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
@@ -23,9 +25,13 @@ import timber.log.Timber;
 
 public class RxMVPApplication extends Application {
 
+    private AppComponent appComponent;
+
+    private RefWatcher refWatcher;
+
     public static RxMVPApplication get(Activity activity){
 
-         return (RxMVPApplication) activity.getApplication();
+        return (RxMVPApplication) activity.getApplication();
     }
 
     public static RxMVPApplication get(Service service){
@@ -33,7 +39,12 @@ public class RxMVPApplication extends Application {
         return (RxMVPApplication) service.getApplication();
     }
 
-    private AppComponent appComponent;
+    public static RefWatcher getRefWater(Context context) {
+
+        RxMVPApplication application = (RxMVPApplication) context.getApplicationContext();
+
+        return application.refWatcher;
+    }
 
     @Override
     public void onCreate() {
@@ -46,18 +57,18 @@ public class RxMVPApplication extends Application {
         Fabric.with(this, new Crashlytics());
         FirebaseAnalytics.getInstance(this);
 
-        //Init Lead Canary
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
-
         //Init Application level dependency injection.
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
+
+        //Init LeakCanary
+        if(LeakCanary.isInAnalyzerProcess(this)){
+
+            return;
+        }
+
+        refWatcher = LeakCanary.install(this);
     }
 
     public AppComponent component() {

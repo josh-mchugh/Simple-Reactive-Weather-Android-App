@@ -1,7 +1,9 @@
 package com.example.jmchugh.rxmvp.weather.mvp.view;
 
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -23,6 +25,9 @@ import butterknife.ButterKnife;
  */
 
 public class WeatherView extends FrameLayout {
+
+    @BindView(R.id.test_toolbar)
+    Toolbar testToolbar;
 
     @BindView(R.id.weather_forecast_recycler_view)
     RecyclerView recyclerView;
@@ -47,6 +52,8 @@ public class WeatherView extends FrameLayout {
 
         recyclerView.setAdapter(weatherRecyclerAdapter);
         recyclerView.setLayoutManager(linearLayoutManger);
+
+        ((AppCompatActivity) activity).setSupportActionBar(testToolbar);
     }
 
     public void updateWeatherView(List<Forecast> forecasts){

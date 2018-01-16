@@ -2,4 +2,7 @@
     <string name="app_name">RxMVP Architecture</string>
     <string name="max_temp">High</string>
     <string name="min_temp">Low</string>
+    <string name="leak_test_menu_btn">Leak</string>
+    <string name="leak_test_async_btn">Run AsyncTask</string>
+    <string name="leak_test_instructions">Click the button to execute the async task then rotate the screen or hit the back button to cause a memory leak and trigger LeakCanary</string>
 </resources>
