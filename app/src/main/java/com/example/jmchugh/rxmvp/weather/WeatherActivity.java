@@ -16,6 +16,8 @@ import com.example.jmchugh.rxmvp.weather.mvp.view.WeatherView;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
+
 public class WeatherActivity extends AppCompatActivity {
 
     @Inject
@@ -35,6 +37,15 @@ public class WeatherActivity extends AppCompatActivity {
 
         setContentView(view);
         presenter.onCreate();
+
+        try {
+
+            throw new Exception("TEST");
+
+        }catch (Exception e){
+
+            Timber.e(e, "This is a test.");
+        }
     }
 
     @Override
