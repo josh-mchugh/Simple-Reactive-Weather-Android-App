@@ -2,6 +2,7 @@ package com.example.jmchugh.rxmvp.weather.dagger;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -50,12 +51,14 @@ public class WeatherModule {
     }
 
     @Provides
+    @WeatherScope
     public WeatherRecyclerAdapter weatherRecyclerAdapter() {
 
         return new WeatherRecyclerAdapter();
     }
 
     @Provides
+    @WeatherScope
     public RecyclerView.LayoutManager layoutManager(Context context) {
 
         return new LinearLayoutManager(context);

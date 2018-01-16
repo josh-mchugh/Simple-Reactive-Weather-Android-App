@@ -4,49 +4,89 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    >
 
     <com.github.pwittchen.weathericonview.WeatherIconView
         android:id="@+id/weather_forecast_item_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:weatherIconColor="@android:color/black"
-        app:weatherIconSize="100" />
+        android:paddingTop="@dimen/dimen_5dp"
+        android:paddingBottom="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_10dp"
+        android:paddingEnd="@dimen/dimen_2dp"
+        app:weatherIconColor="@color/white"
+        app:weatherIconSize="65" />
 
     <TextView
-        android:id="@+id/max_temp_label"
+        android:id="@+id/weather_forecast_date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/max_temp"
+        android:paddingTop="@dimen/dimen_10dp"
+        android:paddingBottom="@dimen/dimen_2dp"
+        android:paddingStart="@dimen/dimen_0dp"
+        android:paddingEnd="@dimen/dimen_10dp"
         app:layout_constraintLeft_toRightOf="@id/weather_forecast_item_icon"
         app:layout_constraintTop_toBottomOf="parent"
+        android:textColor="@color/white"
+        tools:text="Today"
+        />
+
+    <TextView
+        android:id="@+id/max_temp_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dimen_5dp"
+        android:paddingBottom="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_0dp"
+        android:paddingEnd="@dimen/dimen_10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:textColor="@color/white"
+        android:text="@string/max_temp"
         />
 
     <TextView
         android:id="@+id/weather_forecast_item_max_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dimen_5dp"
+        android:paddingBottom="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_0dp"
+        android:paddingEnd="@dimen/dimen_10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/max_temp_text_view"
+        android:textColor="@color/white"
         tools:text="999"
-        app:layout_constraintLeft_toRightOf="@id/weather_forecast_item_icon"
-        app:layout_constraintTop_toBottomOf="@id/max_temp_label"
         />
 
     <TextView
-        android:id="@+id/min_temp_label"
+        android:id="@+id/min_temp_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/min_temp"
-        app:layout_constraintLeft_toRightOf="@id/weather_forecast_item_icon"
+        android:paddingTop="@dimen/dimen_5dp"
+        android:paddingBottom="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_0dp"
+        android:paddingEnd="@dimen/dimen_10dp"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/weather_forecast_item_max_temp"
+        android:textColor="@color/white"
+        android:text="@string/min_temp"
         />
 
     <TextView
         android:id="@+id/weather_forecast_item_min_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dimen_5dp"
+        android:paddingBottom="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_0dp"
+        android:paddingEnd="@dimen/dimen_10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/min_temp_text_view"
+        android:textColor="@color/white"
         tools:text="999"
-        app:layout_constraintLeft_toRightOf="@id/weather_forecast_item_icon"
-        app:layout_constraintTop_toBottomOf="@id/min_temp_label"
         />
 
 

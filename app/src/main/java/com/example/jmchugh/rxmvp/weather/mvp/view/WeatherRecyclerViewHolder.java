@@ -18,6 +18,9 @@ import butterknife.ButterKnife;
 
 public class WeatherRecyclerViewHolder extends RecyclerView.ViewHolder {
 
+    @BindView(R.id.weather_forecast_date_text_view)
+    TextView forecastDate;
+
     @BindView(R.id.weather_forecast_item_min_temp)
     TextView minTemp;
 
@@ -38,6 +41,8 @@ public class WeatherRecyclerViewHolder extends RecyclerView.ViewHolder {
     public void bind(Forecast forecast){
 
         weatherIconView.setIconResource(context.getString(R.string.wi_day_sunny_overcast));
+
+        forecastDate.setText(forecast.getDate());
 
         //Text
         minTemp.setText(forecast.getLow());

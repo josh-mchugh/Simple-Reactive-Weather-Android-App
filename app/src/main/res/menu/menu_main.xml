@@ -7,7 +7,7 @@
     <item
         android:id="@+id/menu_item_test"
         android:orderInCategory="300"
-        android:title="Test"
+        android:title="@string/leak_test_menu_btn"
         app:showAsAction="ifRoom|withText"/>
 
 </menu>
