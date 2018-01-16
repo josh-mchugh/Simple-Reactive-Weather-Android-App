@@ -1,6 +1,5 @@
 package com.example.jmchugh.rxmvp.weather;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,9 +18,6 @@ import javax.inject.Inject;
 
 public class WeatherActivity extends AppCompatActivity {
 
-    private static Activity leak;
-    private static String LEAK_TEST = "TEST";
-
     @Inject
     WeatherView view;
 
@@ -39,8 +35,6 @@ public class WeatherActivity extends AppCompatActivity {
 
         setContentView(view);
         presenter.onCreate();
-
-        this.leak = this;
     }
 
     @Override
