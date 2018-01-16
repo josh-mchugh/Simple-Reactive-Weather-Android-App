@@ -15,6 +15,7 @@ import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import io.fabric.sdk.android.Fabric;
+import io.objectbox.android.AndroidObjectBrowser;
 import timber.log.Timber;
 
 /**
@@ -26,7 +27,6 @@ import timber.log.Timber;
 public class RxMVPApplication extends Application {
 
     private AppComponent appComponent;
-
     private RefWatcher refWatcher;
 
     public static RxMVPApplication get(Activity activity){
@@ -61,6 +61,11 @@ public class RxMVPApplication extends Application {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
+
+        if(BuildConfig.DEBUG) {
+
+            new AndroidObjectBrowser(appComponent.boxStore()).start(this);
+        }
 
         //Init LeakCanary
         if(LeakCanary.isInAnalyzerProcess(this)){

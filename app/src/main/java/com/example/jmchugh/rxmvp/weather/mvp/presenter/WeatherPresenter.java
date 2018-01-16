@@ -1,7 +1,12 @@
 package com.example.jmchugh.rxmvp.weather.mvp.presenter;
 
+import com.example.jmchugh.rxmvp.weather.mvp.model.TestEntity;
 import com.example.jmchugh.rxmvp.weather.mvp.model.WeatherModel;
+import com.example.jmchugh.rxmvp.weather.mvp.model.entity.Forecast;
 import com.example.jmchugh.rxmvp.weather.mvp.view.WeatherView;
+
+import java.util.List;
+import java.util.Random;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -32,7 +37,7 @@ public class WeatherPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                        forecasts -> view.updateWeatherView(forecasts),
+                        forecasts -> storeAndUpdateView(forecasts),
                         error -> {
                             Timber.e(error, "Unable to retrieve forecasts.");
                             view.showErrorToast();
@@ -43,6 +48,14 @@ public class WeatherPresenter {
     }
 
     public void onDestroy(){
+
         compositeDisposable.clear();
+    }
+
+    private void storeAndUpdateView(List<Forecast> forecasts){
+
+        model.getBoxStore().boxFor(TestEntity.class).put(new TestEntity(String.format("Test Value %s", Math.abs(new Random().nextInt(100)))));
+
+        view.updateWeatherView(forecasts);
     }
 }

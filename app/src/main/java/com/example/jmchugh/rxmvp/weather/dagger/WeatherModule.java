@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.jmchugh.rxmvp.app.dagger.AppModule.BoxStoreModule;
 import com.example.jmchugh.rxmvp.app.network.WeatherRetrofitService;
 import com.example.jmchugh.rxmvp.weather.mvp.model.WeatherModel;
 import com.example.jmchugh.rxmvp.weather.mvp.presenter.WeatherPresenter;
@@ -13,6 +14,7 @@ import com.example.jmchugh.rxmvp.weather.mvp.view.WeatherView;
 
 import dagger.Module;
 import dagger.Provides;
+import io.objectbox.BoxStore;
 
 /**
  * Created by jmchugh on 1/12/2018.
@@ -37,9 +39,9 @@ public class WeatherModule {
 
     @Provides
     @WeatherScope
-    public WeatherModel model(WeatherRetrofitService weatherRetrofitService) {
+    public WeatherModel model(WeatherRetrofitService weatherRetrofitService, BoxStore boxStore) {
 
-        return new WeatherModel(activity, weatherRetrofitService);
+        return new WeatherModel(activity, weatherRetrofitService, boxStore);
     }
 
     @Provides
